@@ -1,0 +1,50 @@
+$date
+	Thu Mar 10 23:22:14 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module nand_tb $end
+$var wire 1 ! out1 $end
+$var reg 1 " a $end
+$var reg 1 # b $end
+$scope module n1 $end
+$var wire 1 " in1 $end
+$var wire 1 # in2 $end
+$var wire 1 ! out $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0#
+0"
+1!
+$end
+#1
+1"
+#2
+0"
+1#
+#3
+0!
+1"
+#4
+1!
+0"
+0#
+#5
+1"
+#6
+0"
+1#
+#7
+0!
+1"
+#8
+1!
+0"
+0#
