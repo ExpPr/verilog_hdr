@@ -1,4 +1,5 @@
 `timescale 1ns/1ns
+//https://0o0deng.tistory.com/entry/%EB%85%BC%EB%A6%AC%EC%84%A4%EA%B3%84-Verilog-HDL-%EC%84%A4%EA%B3%84
 module mux21_tb();
     reg a,b,s;
     wire z1,z2,z3,z4,z5,z6,z7;
