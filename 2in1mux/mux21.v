@@ -1,4 +1,5 @@
 //모듈 선언 내부연산에서 input은 무조건 net, output은 reg or net 임
+//모듈에 연결하는 input은 reg 아니면 net형, output은 무조건 wire(net)임 - 주로 모듈내에서 또다른 모듈 혹은 testbench
 module mux21_1(i0,i1,s,y);
     input i0,i1,s;
     output y;
