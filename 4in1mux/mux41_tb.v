@@ -12,17 +12,11 @@ module mux41_tb ();
         in2=$random;
         in3=$random;
         in4=$random;
-        #4
-        in1=$random;
-        in2=$random;
-        in3=$random;
-        in4=$random;
-        
         #4 $finish;
     end
 
     always @(*) begin
-        for (i=0;i<8;i=i+1)
+        for (i=0;i<4;i=i+1)
         begin
             #1
             sel=sel+1;
