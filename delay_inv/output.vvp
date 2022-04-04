@@ -1,0 +1,68 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1110-g18392a46)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 8;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_0000025af7125710 .scope module, "notif1_tb" "notif1_tb" 2 3;
+ .timescale -8 -8;
+v0000025af720b7a0_0 .var "ctrl1", 0 0;
+v0000025af720b840_0 .var "inp", 0 0;
+v0000025af720b8e0_0 .net "out_0451", 0 0, L_0000025af70f2bc0;  1 drivers
+S_0000025af71258a0 .scope module, "a" "not1" 2 8, 3 2 0, S_0000025af7125710;
+ .timescale -8 -8;
+    .port_info 0 /INPUT 1 "in";
+    .port_info 1 /OUTPUT 1 "out";
+    .port_info 2 /INPUT 1 "cltr";
+L_0000025af70f2bc0/d .functor NOTIF1 1, v0000025af720b840_0, v0000025af720b7a0_0, C4<0>, C4<0>;
+L_0000025af70f2bc0 .delay 1 (4,6,8) L_0000025af70f2bc0/d;
+v0000025af7125a30_0 .net "cltr", 0 0, v0000025af720b7a0_0;  1 drivers
+v0000025af70f2b20_0 .net "in", 0 0, v0000025af720b840_0;  1 drivers
+v0000025af720b700_0 .net "out", 0 0, L_0000025af70f2bc0;  alias, 1 drivers
+    .scope S_0000025af7125710;
+T_0 ;
+    %delay 40, 0;
+    %vpi_call 2 11 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0000025af7125710;
+T_1 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000025af720b840_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0000025af720b7a0_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0000025af720b840_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000025af720b840_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0000025af720b840_0, 0, 1;
+    %delay 6, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000025af720b840_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000025af720b7a0_0, 0, 1;
+    %delay 8, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0000025af720b7a0_0, 0, 1;
+    %end;
+    .thread T_1;
+    .scope S_0000025af7125710;
+T_2 ;
+    %vpi_call 2 26 "$dumpfile", "output.vcd" {0 0 0};
+    %vpi_call 2 27 "$dumpvars", 32'sb00000000000000000000000000000000 {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "notif1_tb.v";
+    "notif1.v";
