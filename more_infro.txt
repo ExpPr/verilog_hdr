@@ -35,12 +35,13 @@ module tb_tv ();
         그 전에 만약 (즉 10초 딜레이 전에) 입력값이 바뀌면, 그 때 다시 10초 딜레이 후 반영됨 (게이트 딜레이도 여기에 포함)
             wire #10 out ; assign out = in1 & in2; 는 assign #10 out = in1 &in2 와 같음. (단 같은 모듈 & 인스턴스 내부라면)
 
-    음수취급 : -4b'1002 , -5d'12 , 혹은 sign 선언 될경우 그냥 -10 이런식 가능 (ex :reg signed [4:0]a)
+    음수취급 : -4'b1002 , -5'd12 , 혹은 sign 선언 될경우 그냥 -10 이런식 가능 (ex :reg signed [4:0]a)
+        or a=-'d12 도가능 : -12
      a = -4b;3 === 1101 , verilog에서 sign은 전부 2의보수로 취급한다.
 
     -논리 operations-
     && || ! -> 이 경우 항상 출력은 1 아니면 0이다, 이때 입력은 0 이면 false , 이외 숫자들은 전부 true로 취급한다.
-    ex -> A=4b'1100 , B=4b'0100 , C=0 -> A&&B = 1, A||B = 1, !{(A==1) || (B==3)} -> 1 , !A -> 0 !C = 1
+    ex -> A=4'b1100 , B=4'b0100 , C=0 -> A&&B = 1, A||B = 1, !{(A==1) || (B==3)} -> 1 , !A -> 0 !C = 1
 
     대소 구별시 어느 한 bit라도 x나 z가 있을경우, 출력의 모든 bit는 X로 처리된다!
 
@@ -50,28 +51,28 @@ module tb_tv ();
 
      Bitwise operation : 하나하나 bit를 전부 봄  -> 2개의 operand가 필요함!
         -> (not : ~ // and : & // or : | // xor : ^ // xnor : ^~ , ~^ )
-        -> a=4b'1010, b= 4b'1101  -> a&b == 4b'1000 , a|b==4b'1111 , a^~b== 4b'1000
+        -> a=4'b1010, b= 4'b1101  -> a&b == 4'b1000 , a|b==4'b1111 , a^~b== 4'b1000
 
     Reduction Operator : 오로지 한개의 operand가 필요함 , 하나의 operand의 모든 비트끼리 전부 논리연산을 함.
         -> (and : &// nand : ~& // or : | // xor : ^ // xnor : ^~ , ~^ )
-        -> a=4b'110x , &a === (a[3] & a[2] & a[1] & a[0])
+        -> a=4'b110x , &a === (a[3] & a[2] & a[1] & a[0])
     
     shift 연산자:
      operand<<숫자 -> 오른쪽으로 숫자만큼 bit이동 ////  operand>>숫자 왼쪽으로 숫자만큼 bit이동, 둘다 빈 bit는 무조건 0
      operand<<<숫자 -> 오른쪽으로 숫자만큼 bit이동 ,빈칸은 그냥 0으로 채움 ////  operand>>>숫자 왼쪽으로 숫자만큼 bit이동, 빈 bit는 원래 MSB값을 따라 채움
 
      concentration 
-        a=1b'0 ; b=2b'00 -> assign c = {a,b} === 100 
+        a=1'b0 ; b=2'b00 -> assign c = {a,b} === 100 
         assign {c,out} = a+b+cin 이런식도 가능. 여러개 묶는것도 가능.
 
      repetition
-        reg a=1b'1;
-        reg b=2b'00;
-        reg c=4b'1011;
+        reg a=1'b1;
+        reg b=2'b00;
+        reg c=4'b1011;
 
         -> reg [7:0]C
 
-        c = {4{a} , 2{b} } === 8b'11110000
-        c = {b , 2{a} , c} === 8b'00111011
+        c = {4{a} , 2{b} } === 8'b11110000
+        c = {b , 2{a} , c} === 8'b00111011
     
 endmodule
