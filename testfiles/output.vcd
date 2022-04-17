@@ -1,0 +1,59 @@
+$date
+	Tue Apr 12 08:17:06 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module test_bench $end
+$var reg 5 ! in1 [4:0] $end
+$var reg 5 " in2 [4:0] $end
+$var reg 6 # out0451 [5:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0xxx10 #
+bx1100 "
+b1101 !
+$end
+#1
+b0x #
+b11110 "
+bx !
+#2
+b1 #
+#3
+b0xxxx0 #
+#4
+b1111x #
+#5
+b1 #
+b10110 !
+#7
+b10110 #
+#8
+b11110 #
+#9
+b0x #
+b1100 "
+b100z !
+#10
+b0 #
+b1xxx "
+b1xxz !
+#11
+b0x #
+#12
+b0 #
+b1001x !
+#13
+b0x #
+#14
+b110011 #
+b10011 !
+#15
+b0 "
+#16

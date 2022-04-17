@@ -7,7 +7,7 @@ module test_bench ();
         //0
         in1=5'b1101;
         in2=5'bx1100;
-        out0451=0;
+        out0451=5'bx10;
         //1
         #1
         in1=5'bx;
@@ -61,7 +61,7 @@ module test_bench ();
         #1
         in1=5'b10011;
         out0451=in1;
-        out0451=out0451<<<1;
+        out0451[5]=1;
         //15
         #1
         in1=5'b10011;
