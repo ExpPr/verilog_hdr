@@ -1,0 +1,116 @@
+$date
+	Tue Apr 19 23:23:59 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module mult_tb $end
+$var wire 8 ! out [7:0] $end
+$var reg 4 " a [3:0] $end
+$var reg 4 # b [3:0] $end
+$scope module a2 $end
+$var wire 4 $ a [3:0] $end
+$var wire 4 % b [3:0] $end
+$var wire 8 & out [7:0] $end
+$scope function mult $end
+$var reg 4 ' a [3:0] $end
+$var reg 4 ( b [3:0] $end
+$upscope $end
+$upscope $end
+$scope task set $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx (
+bx '
+bx &
+bx %
+bx $
+bx #
+bx "
+bx !
+$end
+#10
+b100 !
+b100 &
+b1 (
+b100 '
+b1 #
+b1 %
+b100 "
+b100 $
+#20
+b11011 !
+b11011 &
+b11 (
+b1001 '
+b11 #
+b11 %
+b1001 "
+b1001 $
+#30
+b10101001 !
+b10101001 &
+b1101 (
+b1101 '
+b1101 #
+b1101 %
+b1101 "
+b1101 $
+#40
+b1010 !
+b1010 &
+b10 (
+b101 '
+b10 #
+b10 %
+b101 "
+b101 $
+#50
+b1101 !
+b1101 &
+b1101 (
+b1 '
+b1101 #
+b1101 %
+b1 "
+b1 $
+#60
+b1001110 !
+b1001110 &
+b110 '
+b110 "
+b110 $
+#70
+b10011100 !
+b10011100 &
+b1100 (
+b1101 '
+b1100 #
+b1100 %
+b1101 "
+b1101 $
+#80
+b110110 !
+b110110 &
+b110 (
+b1001 '
+b110 #
+b110 %
+b1001 "
+b1001 $
+#90
+b110010 !
+b110010 &
+b1010 (
+b101 '
+b1010 #
+b1010 %
+b101 "
+b101 $
+#100
