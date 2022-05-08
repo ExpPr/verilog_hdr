@@ -1,0 +1,130 @@
+$date
+	Thu Apr 21 09:15:02 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module adder4_tb $end
+$var wire 4 ! sum [3:0] $end
+$var wire 1 " cout $end
+$var reg 4 # a [3:0] $end
+$var reg 4 $ b [3:0] $end
+$var reg 1 % cin $end
+$var integer 32 & i [31:0] $end
+$scope module u1 $end
+$var wire 4 ' a [3:0] $end
+$var wire 4 ( b [3:0] $end
+$var wire 1 % cin $end
+$var wire 4 ) sum [3:0] $end
+$var wire 1 " cout $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx )
+bx (
+bx '
+b0 &
+0%
+bx $
+bx #
+x"
+bx !
+$end
+#5
+b110 !
+b110 )
+0"
+b1 &
+1%
+b1 $
+b1 (
+b100 #
+b100 '
+#10
+b1100 !
+b1100 )
+b10 &
+0%
+b11 $
+b11 (
+b1001 #
+b1001 '
+#15
+b1011 !
+b1011 )
+1"
+b11 &
+1%
+b1101 $
+b1101 (
+b1101 #
+b1101 '
+#20
+0"
+b111 !
+b111 )
+b100 &
+0%
+b10 $
+b10 (
+b101 #
+b101 '
+#25
+b1111 !
+b1111 )
+b101 &
+1%
+b1101 $
+b1101 (
+b1 #
+b1 '
+#30
+b11 !
+b11 )
+1"
+b110 &
+0%
+b110 #
+b110 '
+#35
+b1010 !
+b1010 )
+b111 &
+1%
+b1100 $
+b1100 (
+b1101 #
+b1101 '
+#40
+0"
+b1111 !
+b1111 )
+b1000 &
+0%
+b110 $
+b110 (
+b1001 #
+b1001 '
+#45
+1"
+b0 !
+b0 )
+b1001 &
+1%
+b1010 $
+b1010 (
+b101 #
+b101 '
+#50
+b1100 !
+b1100 )
+0"
+b1010 &
+0%
+b111 $
+b111 (
