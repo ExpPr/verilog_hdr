@@ -199,11 +199,30 @@ module divider(a,b,out,ov);
     output [15:0]out;
     output ov;
 
-    wire [31:0]temp[16:0];
+    reg [31:0] temp;
+    reg [15:0] q;
+    reg [15:0] dividor;
 
-    assign temp[0] = {16'b0,a};
+    always @(a,b) begin
+        q=a;
+        dividor=b;
+        temp={16'b0,q};
 
-
+        //pdf에 제시된 방식이용 , 16bit -> 16번반복
+        
+        repeat (16) begin
+            if (temp[31:16] < dividor ) begin //상위 16bit가 dividor보다 작으면 <<1 적용
+                temp=temp<<1;
+                if (temp[31:16]>=dividor) begin //아닌경우 lsb =1 , 그리고 상위 16bit 값을 dividor만큼 제함
+                    temp[0]=1;
+                    temp[31:16]=temp[31:16]-dividor;
+                end
+        end
+    end
+end
+//하위 16bit가 몫 , b==0 인 경우 , ov판정 on 
+    assign out=temp[15:0];
+    assign ov= (b==0)?1:0;
 endmodule
 
 

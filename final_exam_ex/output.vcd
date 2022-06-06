@@ -1,0 +1,90 @@
+$date
+	Mon Jun 06 16:41:18 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module notgate $end
+$var wire 1 ! in1 $end
+$var wire 1 " out1 $end
+$upscope $end
+$scope module testb $end
+$var wire 1 # z $end
+$var wire 1 $ y $end
+$var wire 1 % x $end
+$var reg 1 & a $end
+$var reg 1 ' b $end
+$var reg 1 ( c $end
+$var reg 1 ) d $end
+$scope module u1 $end
+$var wire 1 # out1 $end
+$var wire 1 $ in2 $end
+$var wire 1 % in1 $end
+$upscope $end
+$scope module u2 $end
+$var wire 1 & in1 $end
+$var wire 1 ' in2 $end
+$var wire 1 % out1 $end
+$upscope $end
+$scope module u3 $end
+$var wire 1 ( in1 $end
+$var wire 1 ) in2 $end
+$var wire 1 $ out1 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0)
+0(
+0'
+0&
+0%
+0$
+0#
+z"
+z!
+$end
+#4
+1&
+#5
+1#
+1%
+1'
+#6
+0#
+1$
+1(
+#7
+1)
+#8
+1#
+0%
+0&
+#10
+0'
+#12
+1&
+0(
+#14
+0#
+0$
+0)
+#15
+1#
+1%
+1'
+#16
+0#
+0%
+0&
+#18
+1#
+1$
+1(
+#20
+1&
+0'
