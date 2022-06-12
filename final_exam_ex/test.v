@@ -3,10 +3,13 @@
 module xorgate (out1, in1, in2);
 input in1, in2;
 output out1;
-assign out1 = in1 ^ in2;
+
 specify
 (in1,in2 *>out)=3;
 endspecify
+
+assign out1 = in1 ^ in2;
+
 endmodule
 module andgate (out1, in1, in2);
 input in1, in2;

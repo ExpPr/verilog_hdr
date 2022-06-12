@@ -3,34 +3,40 @@
 module cpu_tb_v();
     reg rst,clk;
     wire [15:0] instruction;
-
+    integer i;
     cpu test (rst,clk,instruction);
 
     initial begin
         
         rst=0;
         clk=0;
-        $monitor("$1 : %d , $2 : %d , $3 : %d , $4 : %d, $7 : %d , pc : %d",test.regist_oper.internal_reg[1],test.regist_oper.internal_reg[2],test.regist_oper.internal_reg[3],test.regist_oper.internal_reg[4],test.regist_oper.internal_reg[7],test.pc_current);
+       
         forever begin
             #0.5
-            //$display("$0 : %d , $1 : %d , $2 : %d , $3 : %d , $4 : %d, $5 : %d , $6 : %d  $7 : %d",test.regs.internal_reg[0],test.regs.internal_reg[1],test.regs.internal_reg[2],test.regs.internal_reg[3],test.regs.internal_reg[4],test.regs.internal_reg[5],test.regs.internal_reg[6],test.regs.internal_reg[7]);
             clk=~clk;
         end
     end
 
 
     initial begin
-        #20
-        $display("end");
-        $display("$1 : %d , $2 : %d , $3 : %d , $4 : %d, $7 : %d , pc : %x",test.regist_oper.internal_reg[1],test.regist_oper.internal_reg[2],test.regist_oper.internal_reg[3],test.regist_oper.internal_reg[4],test.regist_oper.internal_reg[7],test.pc_current);
-        $display("mem[4] : %d",test.dt_memory.memories[3]);
-        $finish;
+
+        for (i=0;i<20;i++) begin
+            #1;
+            $display("ID:0451, at time : %d ns, PC = %d, RF[0, 1, 2 3, 4, 7] is : %d,   %d, %d, %d, %d, %d",i+1,test.pc_current,test.regist_oper.internal_reg[0],test.regist_oper.internal_reg[1],test.regist_oper.internal_reg[2],test.regist_oper.internal_reg[3],test.regist_oper.internal_reg[4],test.regist_oper.internal_reg[7]);
+        end   
+
     end
 
     initial begin
         #2
         rst=1;
-        $display("start mem[3] : %d",test.dt_memory.memories[3]);
+    end
+
+    initial begin
+        #20
+        $strobe("The final result of $s3 in memory is: %d", test.dt_memory.memories[test.regist_oper.internal_reg[4]]);
+        $strobe("End : PC = %d, RF[0, 1, 2 3, 4, 7] is : %d,   %d, %d, %d, %d, %d",test.pc_current,test.regist_oper.internal_reg[0],test.regist_oper.internal_reg[1],test.regist_oper.internal_reg[2],test.regist_oper.internal_reg[3],test.regist_oper.internal_reg[4],test.regist_oper.internal_reg[7]);
+        $finish;
     end
 
     initial begin

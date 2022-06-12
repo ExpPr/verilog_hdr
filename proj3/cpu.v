@@ -1,4 +1,4 @@
-`timescale 1ns/100ps
+`timescale 1ns/10ps
 
 module alu (//합성가능 확인완료
     input [15:0]rt,
@@ -36,7 +36,6 @@ module alu (//합성가능 확인완료
             end
         endcase
     end
-
     assign zero=(result==0)?1:0;
 endmodule
 
@@ -108,14 +107,12 @@ module register(//레지스터,합성성공
             internal_reg[6]<=0;
             internal_reg[7]<=0;
         end
-        else if(reg_write) begin
+        else if(reg_write && write_reg_loc!=0) begin
             internal_reg[write_reg_loc]<=write_reg_data;
         end
     end
-    
     assign rs=(rs_loc==0 || rs_loc==6)?0:internal_reg[rs_loc];//$0 , $6은 항상 0임을 고려
     assign rt=(rt_loc==0 || rt_loc==6)?0:internal_reg[rt_loc];//$0 , $6은 항상 0임을 고려
-
 
 endmodule
 
@@ -285,11 +282,9 @@ module adder #(
     input [inp1_size-1:0] b,
     output reg [inp1_size-1:0]out
 );
-
     always @(*) begin
         out <= a+b;
     end
-    
 endmodule
 
 
@@ -304,7 +299,7 @@ module mux_3out #(//입력 - 출력 크기를 parameter로 조정. 2번 사용�
    assign out = (sel==0) ? a1 : ( (sel==1) ? a2 : a3);
 endmodule
 
-module mux_2out #(//입력은 16bit이나 출력크기를 조정. 조정이 되는 경우는 최종 pc출력할 때,합성성공
+module mux_2out #(//입력 - 출력 크기를 parameter로 조정. 2번 사용됨,합성성공
     parameter out_bitsize=16
 ) (
     input [out_bitsize-1:0] a,b,
@@ -316,59 +311,48 @@ module mux_2out #(//입력은 16bit이나 출력크기를 조정. 조정이 되�
 endmodule
 
 module instruction_memory (//합성성공
-    input [12:0]pc,j_or_branchpc,
-    input rst,clk,jump,branch,jr_sel,
-    output reg [15:0]instruct
+    input [12:0]pc,
+    input rst,clk,
+    output [15:0]instruct
 );
     reg [15:0] saved_instruct [23:0];
-    reg [12:0] select_pc;
 
     always @(negedge rst,posedge clk) begin
         if (~rst) begin
-            saved_instruct[0]=16'b1001100100000001;
-            saved_instruct[1]=16'b1001100110000010;
-            saved_instruct[2]=16'b0000100111000000;
-            saved_instruct[3]=16'b0000100110010100;
-            saved_instruct[4]=16'b1100010000000010;
-            saved_instruct[5]=16'b0000100111000010; 
-            saved_instruct[6]=16'b0100000000001000;
-            saved_instruct[7]=16'b0000100111000001;
-            saved_instruct[8]=16'b0000100111000011;
-            saved_instruct[9]=16'b0110000000001101;
-            saved_instruct[10]=16'b1111001000000010;
-            saved_instruct[11]=16'b1011101000000011;
-            saved_instruct[12]=16'b0100000000001111;
-            saved_instruct[13]=16'b0000100111000110;
-            saved_instruct[14]=16'b0001110000001000;
-            saved_instruct[15]=16'b0000000000000000;
-            saved_instruct[16]=16'b0000000000000000;
-            saved_instruct[17]=16'b0000000000000000;
-            saved_instruct[18]=16'b0000000000000000;
-            saved_instruct[19]=16'b0000000000000000;
-            saved_instruct[20]=16'b0000000000000000;
-            saved_instruct[21]=16'b0000000000000000;
-            saved_instruct[22]=16'b0000000000000000;
-            saved_instruct[23]=16'b0000000000000000;
-
-            instruct=0;
-        end
-
-        else begin
-            if (jump||branch||jr_sel) begin
-                select_pc=j_or_branchpc;
-            end
-            else begin
-                select_pc=pc;
-            end
-            instruct=saved_instruct[select_pc];
+            saved_instruct[0]<=16'b1001100100000001;
+            saved_instruct[1]<=16'b1001100110000010;
+            saved_instruct[2]<=16'b0000100111000000;
+            saved_instruct[3]<=16'b0000100110010100;
+            saved_instruct[4]<=16'b1100010000000010;
+            saved_instruct[5]<=16'b0000100111000010; 
+            saved_instruct[6]<=16'b0100000000001000;
+            saved_instruct[7]<=16'b0000100111000001;
+            saved_instruct[8]<=16'b0000100111000011;
+            saved_instruct[9]<=16'b0110000000001101;
+            saved_instruct[10]<=16'b1111001000000010;
+            saved_instruct[11]<=16'b1011101000000011;
+            saved_instruct[12]<=16'b0100000000001111;
+            saved_instruct[13]<=16'b0000100111000110;
+            saved_instruct[14]<=16'b0001110000001000;
+            saved_instruct[15]<=16'b0000000000000000;
+            saved_instruct[16]<=16'b0000000000000000;
+            saved_instruct[17]<=16'b0000000000000000;
+            saved_instruct[18]<=16'b0000000000000000;
+            saved_instruct[19]<=16'b0000000000000000;
+            saved_instruct[20]<=16'b0000000000000000;
+            saved_instruct[21]<=16'b0000000000000000;
+            saved_instruct[22]<=16'b0000000000000000;
+            saved_instruct[23]<=16'b0000000000000000;
         end
     end
+
+    assign instruct=(pc>23)?16'd0:saved_instruct[pc];
 endmodule
 
 module pc_ctrl(//합성가능
-    input rst,clk,jump,branch,
+    input rst,clk,
     input [12:0] nextpc,
-    output reg [12:0] pc
+    output reg [12:0]  pc
 );
 
     always @(negedge rst,posedge clk) begin
@@ -377,11 +361,17 @@ module pc_ctrl(//합성가능
         end
         else begin
             pc<=nextpc;
-            pc<=nextpc;
-
         end
     end
+endmodule
 
+
+
+module andgate 
+ (input  in1,in2,
+    output out);
+
+    assign out=in1&in2;
 endmodule
 
 
@@ -411,12 +401,15 @@ module cpu(
     //jr_ctrl결과
     wire jr_sel;
 
+    //직접값 선택 결과 (alu second input)
     wire [15:0]sel_imm_result;
 
+    //연산결과 밑 zeroflag
     wire [15:0] alu_result;
     wire zeroflag; 
 
-    //
+    //beq선택여부
+    wire beq_select;
     wire [12:0] beq_cal_result;
     wire [12:0] beqpc1,selected_j_or_beqpc1;
 
@@ -424,15 +417,18 @@ module cpu(
     wire [15:0] write_data_mid;
 
 
-    //pc값 설정
-    pc_ctrl pc_to_instruct(rst,clk,jump,branch,pc_next,pc_current);
 
+
+    
     //pc값 1추가되는 연산 하기
     adder #(13) pc_1_adder(pc_current,13'd1,pc_add1);
 
     //instruciton 호출
-    instruction_memory inst(pc_current,pc_next,rst,clk,jump,branch,jr_sel,instruction);
+    instruction_memory inst(pc_current,rst,clk,instruction);
     assign act_instruction=instruction;
+
+    //pc값 설정
+    pc_ctrl pc_to_instruct(rst,clk,pc_next,pc_current);
 
     //control 시행
     control ctrl(instruction[15:13],rst,regdst,mem_to_reg,aluop,alusrc,reg_write,mem_read,mem_write,branch,jump);
@@ -457,9 +453,12 @@ module cpu(
     alu alu_oper(rs,sel_imm_result,alu_sel,alu_result,zeroflag,);
 
     //pc처리들
-    adder #(13) beq_calcu(pc_current,sign_extendion,beq_cal_result);
+    adder #(13) beq_calcu(pc_add1,sign_extendion,beq_cal_result);
+   
+
+    andgate beq_sel_and(zeroflag,branch,beq_select);
     //pc+1 혹은 beq값 결정
-    mux_2out #(13) sel_pcadd1_or_beq(pc_add1,beq_cal_result,branch&zeroflag,beqpc1);
+    mux_2out #(13) sel_pcadd1_or_beq(pc_add1,beq_cal_result,beq_select,beqpc1);
     //jump이냐 아니면 beqpc1이냐
     mux_2out #(13) sel_jump_or_beqpc1(beqpc1,instruction[12:0],jump,selected_j_or_beqpc1);
 
